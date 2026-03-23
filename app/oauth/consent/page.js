@@ -69,8 +69,12 @@ export default async function ConsentPage({ searchParams }) {
   }
 
   // Redirect back to Claude/Cowork
-  if (data && data.redirect_to) {
-    redirect(data.redirect_to)
+  // Note: Supabase API returns redirect_url (not redirect_to) — check both
+  const redirectUrl = data?.redirect_to || data?.redirect_url
+  console.log('[consent] redirect URL:', redirectUrl, 'full data:', JSON.stringify(data))
+
+  if (redirectUrl) {
+    redirect(redirectUrl)
   }
 
   return (
