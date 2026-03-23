@@ -24,9 +24,26 @@ export default async function ConsentPage({ searchParams }) {
     redirect('/login?redirect=' + encodeURIComponent(returnPath))
   }
 
-  // Auto-approve server-side — the user already clicked Connect in Cowork
-  // and signed in with Google. No need for another click.
+  // Log what we know for debugging
+  console.log('[consent] user:', user.email, 'authorization_id:', authorizationId)
+
+  // First try to get authorization details to see if it's still valid
+  let detailsResult = null
+  try {
+    detailsResult = await supabase.auth.oauth.getAuthorizationDetails(authorizationId)
+    console.log('[consent] getAuthorizationDetails:', JSON.stringify(detailsResult))
+  } catch (e) {
+    console.log('[consent] getAuthorizationDetails error:', e.message)
+  }
+
+  // If details returned a redirect_url, user already consented — redirect immediately
+  if (detailsResult?.data?.redirect_url) {
+    redirect(detailsResult.data.redirect_url)
+  }
+
+  // Auto-approve server-side
   const { data, error } = await supabase.auth.oauth.approveAuthorization(authorizationId)
+  console.log('[consent] approveAuthorization result:', JSON.stringify({ data, error }))
 
   if (error) {
     return (
@@ -44,9 +61,9 @@ export default async function ConsentPage({ searchParams }) {
         </div>
         <h1 style={{ fontSize: 20, fontWeight: 600, marginBottom: 8 }}>Connection Failed</h1>
         <p style={{ color: '#666', fontSize: 14, marginBottom: 16 }}>
-          The authorization request expired or was invalid. Please try connecting again from Claude.
+          Please try connecting again from Claude. The authorization may have expired during sign-in.
         </p>
-        <p style={{ color: '#d33', fontSize: 12 }}>{error.message || error.code}</p>
+        <p style={{ color: '#d33', fontSize: 12 }}>Debug: {error.message || error.code} | User: {user.email} | Auth ID: {authorizationId}</p>
       </div>
     )
   }
