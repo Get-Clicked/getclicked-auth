@@ -14,11 +14,10 @@ function LoginForm() {
   )
 
   async function handleGoogleSignIn() {
-    const currentOrigin = window.location.origin
     await supabase.auth.signInWithOAuth({
       provider: 'google',
       options: {
-        redirectTo: currentOrigin + '/auth/callback?redirect=' + encodeURIComponent(redirect),
+        redirectTo: 'https://auth.getclicked.ai/auth/callback?redirect=' + encodeURIComponent(redirect),
       },
     })
   }
