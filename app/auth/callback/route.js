@@ -29,5 +29,7 @@ export async function GET(request) {
     await supabase.auth.exchangeCodeForSession(code)
   }
 
-  return NextResponse.redirect(new URL(redirect, request.url))
+  // Use the public URL, not the internal Render URL
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://auth.getclicked.ai'
+  return NextResponse.redirect(new URL(redirect, baseUrl))
 }
