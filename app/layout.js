@@ -1,19 +1,22 @@
 export const metadata = {
-  title: 'getClicked — Sign In',
+  title: 'Get Clicked — Sign Up',
+  description: 'Create your free Get Clicked account.',
 }
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+      </head>
       <body style={{
         margin: 0,
-        fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
-        background: '#fafafa',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        minHeight: '100vh',
-        color: '#1a1a1a',
+        fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif',
+        background: '#FAFAFA',
+        color: '#111',
+        WebkitFontSmoothing: 'antialiased',
       }}>
         {children}
       </body>
