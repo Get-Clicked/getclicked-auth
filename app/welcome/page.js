@@ -71,30 +71,6 @@ export default async function WelcomePage() {
           </Link>
         </div>
 
-        {/* Value props */}
-        <div className="value-bar">
-          <div className="value-item">
-            <span className="value-icon">🔍</span>
-            <div>
-              <p className="value-title">Competitive analysis</p>
-              <p className="value-desc">Real keyword data and competitor gaps</p>
-            </div>
-          </div>
-          <div className="value-item">
-            <span className="value-icon">📊</span>
-            <div>
-              <p className="value-title">Campaign ready</p>
-              <p className="value-desc">Ad groups, keywords, copy you can publish</p>
-            </div>
-          </div>
-          <div className="value-item">
-            <span className="value-icon">🎯</span>
-            <div>
-              <p className="value-title">Brand positioning</p>
-              <p className="value-desc">Strategy doc your team will actually use</p>
-            </div>
-          </div>
-        </div>
       </div>
 
       <style>{`
@@ -246,18 +222,6 @@ export default async function WelcomePage() {
         .card-link-coral { color: #FF4F6D; }
         .card-link-violet { color: #7B2FFF; }
 
-        .value-bar {
-          display: grid;
-          grid-template-columns: 1fr 1fr 1fr;
-          gap: 12px;
-          background: #FAFAFA;
-          border-radius: 16px;
-          padding: 20px;
-        }
-        .value-item { display: flex; gap: 10px; align-items: flex-start; }
-        .value-icon { font-size: 20px; flex-shrink: 0; margin-top: 2px; }
-        .value-title { font-size: 13px; font-weight: 600; color: #111; margin-bottom: 2px; }
-        .value-desc { font-size: 11px; color: #999; line-height: 1.4; }
       `}</style>
     </div>
   )
