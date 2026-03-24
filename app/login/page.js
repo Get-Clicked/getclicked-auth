@@ -44,6 +44,7 @@ function LoginForm() {
       }}>
         {/* Logo */}
         <div style={{
+          fontFamily: "'TWK Lausanne', sans-serif",
           fontSize: 22,
           fontWeight: 800,
           marginBottom: 32,
@@ -54,6 +55,7 @@ function LoginForm() {
         </div>
 
         <h1 style={{
+          fontFamily: "'TWK Lausanne', sans-serif",
           fontSize: 28,
           fontWeight: 700,
           marginBottom: 8,
