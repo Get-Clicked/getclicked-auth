@@ -1,6 +1,6 @@
 import { createSupabaseServer } from '@/lib/supabase-server'
 import { redirect } from 'next/navigation'
-import Link from 'next/link'
+import { TopBar, ProgressBar, CopyBlock } from '../components'
 
 export const dynamic = 'force-dynamic'
 
@@ -12,154 +12,120 @@ export default async function CoworkSetup() {
     redirect('/login?redirect=/welcome/cowork')
   }
 
-  const email = user.email
-  const avatar = user.user_metadata?.avatar_url
-
-  const steps = [
-    {
-      title: 'Download Claude Desktop',
-      desc: 'If you don\'t have it yet, download the Claude app.',
-      link: { text: 'Download Claude', href: 'https://claude.com/download' },
-    },
-    {
-      title: 'Switch to Cowork',
-      desc: 'Open Claude Desktop and click the "Cowork" tab at the top.',
-    },
-    {
-      title: 'Add the Get Clicked marketplace',
-      desc: 'Click "Customize" in the sidebar, then "Browse plugins," then "Add marketplace." Paste this:',
-      code: 'Get-Clicked/getclicked-growth',
-    },
-    {
-      title: 'Install the plugin',
-      desc: 'Find "getclicked-growth" in the list and click Install.',
-    },
-    {
-      title: 'Start talking',
-      desc: 'Open a new conversation and tell it about your business. It handles the rest.',
-    },
-  ]
-
   return (
-    <div style={{
-      minHeight: '100vh',
-      background: '#FAFAFA',
-      fontFamily: 'Inter, system-ui, sans-serif',
-    }}>
+    <div style={{ minHeight: '100vh', background: 'white' }}>
+      <TopBar email={user.email} avatar={user.user_metadata?.avatar_url} />
+      <ProgressBar step={2} />
 
-      {/* Top bar */}
-      <div style={{
-        display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-        padding: '16px 32px', borderBottom: '1px solid #F0F0F0', background: 'white',
-      }}>
-        <Link href="/welcome" style={{ textDecoration: 'none' }}>
-          <div style={{
-            fontFamily: "'TWK Lausanne', sans-serif", fontSize: 18, fontWeight: 800,
-            letterSpacing: '-0.02em', color: '#111',
-          }}>
-            Get Clicked<span style={{ color: '#FF4F6D' }}>.</span>
-          </div>
-        </Link>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-          <span style={{ fontSize: 12, color: '#999' }}>{email}</span>
-          {avatar && <img src={avatar} alt="" style={{ width: 28, height: 28, borderRadius: '50%', border: '2px solid #F0F0F0' }} />}
-        </div>
-      </div>
-
-      {/* Progress */}
-      <div style={{ display: 'flex', justifyContent: 'center', padding: '24px 32px 0' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-          <div style={{
-            display: 'flex', alignItems: 'center', gap: 6,
-            color: '#22C55E', padding: '4px 14px', borderRadius: 999, fontSize: 12, fontWeight: 600,
-            border: '1px solid rgba(34,197,94,0.2)', background: 'rgba(34,197,94,0.05)',
-          }}>✓ Choose path</div>
-          <div style={{ width: 24, height: 1, background: '#DDD' }}></div>
-          <div style={{
-            display: 'flex', alignItems: 'center', gap: 6,
-            background: '#111', color: 'white',
-            padding: '4px 14px', borderRadius: 999, fontSize: 12, fontWeight: 600,
-          }}>2 Install</div>
-          <div style={{ width: 24, height: 1, background: '#DDD' }}></div>
-          <div style={{
-            color: '#CCC', padding: '4px 14px', borderRadius: 999, fontSize: 12, fontWeight: 500,
-            border: '1px solid #E8E8E8',
-          }}>3 Start</div>
-        </div>
-      </div>
-
-      {/* Content */}
-      <div style={{ maxWidth: 520, margin: '0 auto', padding: '48px 24px' }}>
-        <Link href="/welcome" style={{ fontSize: 13, color: '#888', textDecoration: 'none' }}>← Back</Link>
+      <div style={{ maxWidth: 560, margin: '0 auto', padding: '48px 24px 80px' }}>
+        <a href="/welcome" style={{ fontSize: 13, color: '#888', textDecoration: 'none' }}>← Back</a>
 
         <h1 style={{
           fontFamily: "'TWK Lausanne', sans-serif",
-          fontSize: 32, fontWeight: 800, color: '#111',
-          letterSpacing: '-0.02em', marginTop: 16, marginBottom: 6,
+          fontSize: 40, fontWeight: 800, color: '#111',
+          letterSpacing: '-0.03em', marginTop: 16, marginBottom: 6,
         }}>
-          Set up Cowork
+          Set up Cowork<span style={{ color: '#FF4F6D' }}>.</span>
         </h1>
-        <p style={{ fontSize: 14, color: '#888', marginBottom: 32, lineHeight: 1.6 }}>
+        <p style={{ fontSize: 16, color: '#888', marginBottom: 40 }}>
           Five steps. About 2 minutes.
         </p>
 
-        {/* Steps as checklist */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-          {steps.map((step, i) => (
-            <div key={i} style={{
-              background: 'white', borderRadius: 14, padding: 20,
-              border: '1px solid #F0F0F0',
-              display: 'flex', gap: 14, alignItems: 'flex-start',
-            }}>
-              <div style={{
-                width: 28, height: 28, borderRadius: 8,
-                border: '2px solid #E8E8E8', display: 'flex',
-                alignItems: 'center', justifyContent: 'center', flexShrink: 0,
-                fontSize: 12, fontWeight: 700, color: '#CCC',
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
+
+          {/* Step 1 */}
+          <Step num={1} title="Download Claude Desktop" last={false}>
+            <p style={{ fontSize: 14, color: '#888', lineHeight: 1.6 }}>
+              If you don't have it yet, grab the app.
+            </p>
+            <a href="https://claude.com/download" target="_blank" rel="noopener noreferrer"
+              style={{
+                display: 'inline-flex', marginTop: 10,
+                fontSize: 13, fontWeight: 600, color: 'white',
+                background: '#111', padding: '8px 20px', borderRadius: 999,
+                textDecoration: 'none',
               }}>
-                {i + 1}
-              </div>
-              <div style={{ flex: 1 }}>
-                <h3 style={{
-                  fontFamily: "'TWK Lausanne', sans-serif",
-                  fontSize: 15, fontWeight: 700, color: '#111', marginBottom: 4,
-                }}>{step.title}</h3>
-                <p style={{ fontSize: 13, color: '#888', lineHeight: 1.5 }}>{step.desc}</p>
-                {step.code && (
-                  <div style={{
-                    background: '#111', borderRadius: 8,
-                    padding: '10px 14px', marginTop: 8,
-                    fontFamily: "'JetBrains Mono', monospace",
-                    fontSize: 12, color: 'rgba(255,255,255,0.8)',
-                    userSelect: 'all', cursor: 'text',
-                  }}>
-                    {step.code}
-                  </div>
-                )}
-                {step.link && (
-                  <a href={step.link.href} target="_blank" rel="noopener noreferrer"
-                    style={{
-                      display: 'inline-block', marginTop: 8,
-                      fontSize: 13, fontWeight: 600, color: '#FF4F6D',
-                      textDecoration: 'none',
-                    }}>
-                    {step.link.text} ↗
-                  </a>
-                )}
-              </div>
+              Download Claude ↗
+            </a>
+          </Step>
+
+          {/* Step 2 */}
+          <Step num={2} title="Switch to Cowork" last={false}>
+            <p style={{ fontSize: 14, color: '#888', lineHeight: 1.6 }}>
+              Open Claude Desktop and click the <strong style={{ color: '#111' }}>Cowork</strong> tab at the top.
+            </p>
+          </Step>
+
+          {/* Step 3 */}
+          <Step num={3} title="Add the Get Clicked marketplace" last={false}>
+            <p style={{ fontSize: 14, color: '#888', lineHeight: 1.6, marginBottom: 4 }}>
+              Click <strong style={{ color: '#111' }}>Customize</strong> → <strong style={{ color: '#111' }}>Browse plugins</strong> → <strong style={{ color: '#111' }}>Add marketplace</strong> and paste:
+            </p>
+            <CopyBlock code="Get-Clicked/getclicked-growth" dark={false} />
+          </Step>
+
+          {/* Step 4 */}
+          <Step num={4} title="Install the plugin" last={false}>
+            <p style={{ fontSize: 14, color: '#888', lineHeight: 1.6 }}>
+              Find <strong style={{ color: '#111' }}>getclicked-growth</strong> in the list and click <strong style={{ color: '#111' }}>Install</strong>.
+            </p>
+          </Step>
+
+          {/* Step 5 */}
+          <Step num={5} title="Start talking" last={true}>
+            <p style={{ fontSize: 14, color: '#888', lineHeight: 1.6 }}>
+              Open a new conversation. Tell it about your business. Something like:
+            </p>
+            <div style={{
+              background: '#F5F3EE', borderRadius: 10, padding: '12px 16px',
+              fontSize: 14, color: '#666', marginTop: 8, fontStyle: 'italic',
+            }}>
+              "I run a B2B analytics company targeting startups. Help me figure out my marketing."
             </div>
-          ))}
+          </Step>
         </div>
 
         {/* Footer */}
-        <div style={{ textAlign: 'center', marginTop: 40, padding: '24px 0', borderTop: '1px solid #F0F0F0' }}>
-          <p style={{ fontSize: 14, color: '#888', marginBottom: 8 }}>
-            Your first deliverable is about 10 minutes away.
+        <div style={{ textAlign: 'center', marginTop: 48, padding: '24px 0', borderTop: '1px solid #F0F0F0' }}>
+          <p style={{ fontSize: 15, color: '#111', fontWeight: 500, marginBottom: 4 }}>
+            Your first deliverable is 10 minutes away.
           </p>
-          <p style={{ fontSize: 12, color: '#CCC' }}>
-            Having trouble? <a href="mailto:hello@getclicked.ai" style={{ color: '#999', textDecoration: 'underline' }}>hello@getclicked.ai</a>
+          <p style={{ fontSize: 12, color: '#CCC', marginTop: 12 }}>
+            Stuck? <a href="mailto:hello@getclicked.ai" style={{ color: '#999', textDecoration: 'underline' }}>hello@getclicked.ai</a>
           </p>
         </div>
+      </div>
+    </div>
+  )
+}
+
+function Step({ num, title, children, last }) {
+  return (
+    <div style={{ display: 'flex', gap: 20 }}>
+      {/* Timeline */}
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', flexShrink: 0 }}>
+        <div style={{
+          width: 36, height: 36, borderRadius: 12,
+          background: '#111', color: 'white',
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+          fontFamily: "'TWK Lausanne', sans-serif",
+          fontSize: 14, fontWeight: 700,
+        }}>
+          {num}
+        </div>
+        {!last && <div style={{ width: 2, flex: 1, background: '#F0F0F0', minHeight: 24 }} />}
+      </div>
+
+      {/* Content */}
+      <div style={{ flex: 1, paddingBottom: last ? 0 : 28 }}>
+        <h3 style={{
+          fontFamily: "'TWK Lausanne', sans-serif",
+          fontSize: 17, fontWeight: 700, color: '#111',
+          marginBottom: 6, marginTop: 6,
+        }}>
+          {title}
+        </h3>
+        {children}
       </div>
     </div>
   )

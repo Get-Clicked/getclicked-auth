@@ -17,249 +17,248 @@ export default async function WelcomePage() {
   const email = user.email
 
   return (
-    <div style={{
-      minHeight: '100vh',
-      background: '#FAFAFA',
-      fontFamily: 'Inter, system-ui, sans-serif',
-    }}>
-
+    <div className="welcome-page">
       {/* Top bar */}
-      <div style={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        padding: '16px 32px',
-        borderBottom: '1px solid #F0F0F0',
-        background: 'white',
-      }}>
-        <div style={{
-          fontFamily: "'TWK Lausanne', sans-serif",
-          fontSize: 18,
-          fontWeight: 800,
-          letterSpacing: '-0.02em',
-          color: '#111',
-        }}>
-          Get Clicked<span style={{ color: '#FF4F6D' }}>.</span>
-        </div>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-          <span style={{ fontSize: 12, color: '#999' }}>{email}</span>
-          {avatar && (
-            <img src={avatar} alt="" style={{
-              width: 28, height: 28, borderRadius: '50%',
-              border: '2px solid #F0F0F0',
-            }} />
-          )}
+      <div className="topbar">
+        <div className="logo">Get Clicked<span className="dot">.</span></div>
+        <div className="user-info">
+          <span className="user-email">{email}</span>
+          {avatar && <img src={avatar} alt="" className="user-avatar" />}
         </div>
       </div>
 
-      {/* Progress */}
-      <div style={{
-        display: 'flex',
-        justifyContent: 'center',
-        padding: '24px 32px 0',
-      }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-          <div style={{
-            display: 'flex', alignItems: 'center', gap: 6,
-            background: '#111', color: 'white',
-            padding: '4px 14px', borderRadius: 999, fontSize: 12, fontWeight: 600,
-          }}>
-            <span>1</span> Choose path
-          </div>
-          <div style={{ width: 24, height: 1, background: '#DDD' }}></div>
-          <div style={{
-            display: 'flex', alignItems: 'center', gap: 6,
-            color: '#CCC', padding: '4px 14px', borderRadius: 999, fontSize: 12, fontWeight: 500,
-            border: '1px solid #E8E8E8',
-          }}>
-            <span>2</span> Install
-          </div>
-          <div style={{ width: 24, height: 1, background: '#DDD' }}></div>
-          <div style={{
-            display: 'flex', alignItems: 'center', gap: 6,
-            color: '#CCC', padding: '4px 14px', borderRadius: 999, fontSize: 12, fontWeight: 500,
-            border: '1px solid #E8E8E8',
-          }}>
-            <span>3</span> Start
-          </div>
-        </div>
+      {/* Hero */}
+      <div className="hero">
+        {avatar && <img src={avatar} alt="" className="hero-avatar" />}
+        <h1 className="hero-title">Welcome, {firstName}.</h1>
+        <p className="hero-sub">Your account is ready. Let's get you set up.</p>
       </div>
 
-      {/* Main content */}
-      <div style={{
-        maxWidth: 640,
-        margin: '0 auto',
-        padding: '60px 24px',
-      }}>
-        {/* Welcome */}
-        <div style={{ textAlign: 'center', marginBottom: 48 }}>
-          {avatar && (
-            <img src={avatar} alt="" style={{
-              width: 72, height: 72, borderRadius: '50%',
-              marginBottom: 16,
-              border: '3px solid white',
-              boxShadow: '0 4px 12px rgba(0,0,0,0.06)',
-            }} />
-          )}
-          <h1 style={{
-            fontFamily: "'TWK Lausanne', sans-serif",
-            fontSize: 40,
-            fontWeight: 800,
-            color: '#111',
-            letterSpacing: '-0.03em',
-            marginBottom: 8,
-          }}>
-            Welcome, {firstName}.
-          </h1>
-          <p style={{ fontSize: 16, color: '#888', lineHeight: 1.6 }}>
-            How do you want to use Get Clicked?
-          </p>
-        </div>
-
-        {/* Path cards */}
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: '1.2fr 1fr',
-          gap: 16,
-          marginBottom: 48,
-        }}>
+      {/* Path cards */}
+      <div className="cards-container">
+        <div className="cards">
           {/* Cowork */}
-          <Link href="/welcome/cowork" style={{ textDecoration: 'none', color: 'inherit' }}>
-            <div style={{
-              background: 'white',
-              borderRadius: 20,
-              padding: '28px 28px 24px',
-              border: '2px solid rgba(255,79,109,0.12)',
-              cursor: 'pointer',
-              height: '100%',
-              transition: 'transform 0.15s ease, box-shadow 0.15s ease',
-            }}>
-              {/* Mini Claude UI preview */}
-              <div style={{
-                background: '#F5F3EE',
-                borderRadius: 10,
-                padding: 12,
-                marginBottom: 20,
-                height: 80,
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-                  <div style={{
-                    width: 24, height: 24, borderRadius: '50%',
-                    background: '#D4A574', display: 'flex',
-                    alignItems: 'center', justifyContent: 'center',
-                    fontSize: 12, color: 'white',
-                  }}>✦</div>
-                  <div style={{
-                    background: '#E8E6E1', borderRadius: 8, padding: '4px 10px',
-                    fontSize: 10, color: '#666',
-                  }}>Tell me about your business...</div>
-                </div>
+          <Link href="/welcome/cowork" className="card card-primary">
+            <div className="card-preview card-preview-cowork">
+              <div className="cowork-mock">
+                <div className="cowork-avatar">✦</div>
+                <div className="cowork-bubble">Tell me about your business...</div>
               </div>
-
-              <span style={{
-                fontSize: 10, fontWeight: 600,
-                background: 'rgba(255,79,109,0.08)', color: '#FF4F6D',
-                padding: '3px 10px', borderRadius: 999,
-              }}>Recommended</span>
-
-              <h2 style={{
-                fontFamily: "'TWK Lausanne', sans-serif",
-                fontSize: 20, fontWeight: 700,
-                marginTop: 12, marginBottom: 6, color: '#111',
-              }}>I'm a marketer</h2>
-
-              <p style={{ fontSize: 13, color: '#888', lineHeight: 1.5, marginBottom: 16 }}>
-                Use Get Clicked in Claude Desktop. No terminal, no code.
-              </p>
-
-              <span style={{ fontSize: 13, fontWeight: 600, color: '#FF4F6D' }}>
-                Set up Cowork →
-              </span>
+            </div>
+            <div className="card-body">
+              <span className="badge badge-coral">Recommended</span>
+              <h2 className="card-title">I'm a marketer</h2>
+              <p className="card-desc">Use Get Clicked in Claude Desktop. No terminal, no code. Just a conversation.</p>
+              <span className="card-link card-link-coral">Set up Cowork →</span>
             </div>
           </Link>
 
           {/* Code */}
-          <Link href="/welcome/code" style={{ textDecoration: 'none', color: 'inherit' }}>
-            <div style={{
-              background: 'white',
-              borderRadius: 20,
-              padding: '28px 28px 24px',
-              border: '1px solid #E8E8E8',
-              cursor: 'pointer',
-              height: '100%',
-            }}>
-              {/* Mini terminal preview */}
-              <div style={{
-                background: '#111',
-                borderRadius: 10,
-                padding: 12,
-                marginBottom: 20,
-                height: 80,
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'center',
-              }}>
-                <div style={{ fontFamily: 'monospace', fontSize: 9, color: 'rgba(255,255,255,0.5)' }}>
-                  <p>$ claude plugin install getclicked-growth</p>
-                  <p style={{ color: 'rgba(123,47,255,0.7)' }}>✓ Plugin installed</p>
-                </div>
+          <Link href="/welcome/code" className="card card-secondary">
+            <div className="card-preview card-preview-code">
+              <div className="code-mock">
+                <span className="code-prompt">$</span> claude plugin install getclicked-growth
+                <br />
+                <span className="code-success">✓ Plugin installed</span>
               </div>
-
-              <span style={{
-                fontSize: 10, fontWeight: 600,
-                background: 'rgba(123,47,255,0.08)', color: '#7B2FFF',
-                padding: '3px 10px', borderRadius: 999,
-              }}>For developers</span>
-
-              <h2 style={{
-                fontFamily: "'TWK Lausanne', sans-serif",
-                fontSize: 20, fontWeight: 700,
-                marginTop: 12, marginBottom: 6, color: '#111',
-              }}>I'm a developer</h2>
-
-              <p style={{ fontSize: 13, color: '#888', lineHeight: 1.5, marginBottom: 16 }}>
-                Install via CLI. Local files, full control.
-              </p>
-
-              <span style={{ fontSize: 13, fontWeight: 600, color: '#7B2FFF' }}>
-                Set up Code →
-              </span>
+            </div>
+            <div className="card-body">
+              <span className="badge badge-violet">For developers</span>
+              <h2 className="card-title">I'm a developer</h2>
+              <p className="card-desc">Install via CLI. Local files, full control.</p>
+              <span className="card-link card-link-violet">Set up Code →</span>
             </div>
           </Link>
         </div>
 
-        {/* What you'll get */}
-        <div style={{
-          background: 'white',
-          borderRadius: 16,
-          padding: 24,
-          border: '1px solid #F0F0F0',
-        }}>
-          <p style={{ fontSize: 11, fontWeight: 600, color: '#999', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: 16 }}>
-            What you'll get in your first session
-          </p>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 16 }}>
+        {/* Value props */}
+        <div className="value-bar">
+          <div className="value-item">
+            <span className="value-icon">🔍</span>
             <div>
-              <p style={{ fontSize: 24, marginBottom: 4 }}>🔍</p>
-              <p style={{ fontSize: 13, fontWeight: 600, color: '#111', marginBottom: 2 }}>Competitive analysis</p>
-              <p style={{ fontSize: 11, color: '#999' }}>Real keyword data and competitor gaps</p>
+              <p className="value-title">Competitive analysis</p>
+              <p className="value-desc">Real keyword data and competitor gaps</p>
             </div>
+          </div>
+          <div className="value-item">
+            <span className="value-icon">📊</span>
             <div>
-              <p style={{ fontSize: 24, marginBottom: 4 }}>📊</p>
-              <p style={{ fontSize: 13, fontWeight: 600, color: '#111', marginBottom: 2 }}>Campaign ready</p>
-              <p style={{ fontSize: 11, color: '#999' }}>Ad groups, keywords, and copy you can publish</p>
+              <p className="value-title">Campaign ready</p>
+              <p className="value-desc">Ad groups, keywords, copy you can publish</p>
             </div>
+          </div>
+          <div className="value-item">
+            <span className="value-icon">🎯</span>
             <div>
-              <p style={{ fontSize: 24, marginBottom: 4 }}>🎯</p>
-              <p style={{ fontSize: 13, fontWeight: 600, color: '#111', marginBottom: 2 }}>Brand positioning</p>
-              <p style={{ fontSize: 11, color: '#999' }}>Strategy doc your team will actually use</p>
+              <p className="value-title">Brand positioning</p>
+              <p className="value-desc">Strategy doc your team will actually use</p>
             </div>
           </div>
         </div>
       </div>
+
+      <style>{`
+        .welcome-page {
+          min-height: 100vh;
+          background: white;
+        }
+
+        .topbar {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding: 16px 32px;
+          border-bottom: 1px solid #F0F0F0;
+        }
+        .logo {
+          font-family: 'TWK Lausanne', sans-serif;
+          font-size: 20px;
+          font-weight: 800;
+          letter-spacing: -0.02em;
+          color: #111;
+        }
+        .dot { color: #FF4F6D; }
+        .user-info { display: flex; align-items: center; gap: 10px; }
+        .user-email { font-size: 12px; color: #999; }
+        .user-avatar { width: 28px; height: 28px; border-radius: 50%; border: 2px solid #F0F0F0; }
+
+        .hero {
+          text-align: center;
+          padding: 64px 24px 48px;
+          background: linear-gradient(180deg, #FAFAFA, white);
+        }
+        .hero-avatar {
+          width: 80px;
+          height: 80px;
+          border-radius: 50%;
+          margin-bottom: 20px;
+          border: 4px solid white;
+          box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+        }
+        .hero-title {
+          font-family: 'TWK Lausanne', sans-serif;
+          font-size: 48px;
+          font-weight: 800;
+          color: #111;
+          letter-spacing: -0.035em;
+          margin-bottom: 8px;
+        }
+        .hero-sub {
+          font-size: 18px;
+          color: #888;
+        }
+
+        .cards-container {
+          max-width: 720px;
+          margin: 0 auto;
+          padding: 0 24px 80px;
+        }
+
+        .cards {
+          display: grid;
+          grid-template-columns: 1.2fr 1fr;
+          gap: 16px;
+          margin-bottom: 24px;
+        }
+
+        .card {
+          border-radius: 20px;
+          overflow: hidden;
+          text-decoration: none;
+          color: inherit;
+          transition: transform 0.2s ease, box-shadow 0.2s ease;
+          display: flex;
+          flex-direction: column;
+        }
+        .card:hover {
+          transform: translateY(-4px);
+          box-shadow: 0 12px 32px rgba(0,0,0,0.08);
+        }
+        .card-primary { border: 2px solid rgba(255,79,109,0.15); }
+        .card-secondary { border: 1px solid #E8E8E8; }
+
+        .card-preview {
+          height: 120px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 20px;
+        }
+        .card-preview-cowork { background: #F5F3EE; }
+        .card-preview-code { background: #111; }
+
+        .cowork-mock {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+        }
+        .cowork-avatar {
+          width: 32px; height: 32px;
+          border-radius: 50%;
+          background: #D4A574;
+          display: flex; align-items: center; justify-content: center;
+          font-size: 16px; color: white;
+        }
+        .cowork-bubble {
+          background: #E8E6E1;
+          border-radius: 12px;
+          padding: 8px 14px;
+          font-size: 12px;
+          color: #666;
+        }
+
+        .code-mock {
+          font-family: 'JetBrains Mono', monospace;
+          font-size: 11px;
+          color: rgba(255,255,255,0.5);
+          line-height: 1.8;
+        }
+        .code-prompt { color: rgba(255,255,255,0.3); }
+        .code-success { color: rgba(123,47,255,0.7); }
+
+        .card-body { padding: 24px; }
+
+        .badge {
+          display: inline-block;
+          font-size: 10px;
+          font-weight: 600;
+          padding: 3px 10px;
+          border-radius: 999px;
+          margin-bottom: 12px;
+        }
+        .badge-coral { background: rgba(255,79,109,0.08); color: #FF4F6D; }
+        .badge-violet { background: rgba(123,47,255,0.08); color: #7B2FFF; }
+
+        .card-title {
+          font-family: 'TWK Lausanne', sans-serif;
+          font-size: 22px;
+          font-weight: 700;
+          color: #111;
+          margin-bottom: 6px;
+        }
+        .card-desc {
+          font-size: 14px;
+          color: #888;
+          line-height: 1.5;
+          margin-bottom: 16px;
+        }
+        .card-link { font-size: 14px; font-weight: 600; }
+        .card-link-coral { color: #FF4F6D; }
+        .card-link-violet { color: #7B2FFF; }
+
+        .value-bar {
+          display: grid;
+          grid-template-columns: 1fr 1fr 1fr;
+          gap: 12px;
+          background: #FAFAFA;
+          border-radius: 16px;
+          padding: 20px;
+        }
+        .value-item { display: flex; gap: 10px; align-items: flex-start; }
+        .value-icon { font-size: 20px; flex-shrink: 0; margin-top: 2px; }
+        .value-title { font-size: 13px; font-weight: 600; color: #111; margin-bottom: 2px; }
+        .value-desc { font-size: 11px; color: #999; line-height: 1.4; }
+      `}</style>
     </div>
   )
 }
