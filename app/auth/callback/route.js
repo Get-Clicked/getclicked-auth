@@ -29,7 +29,12 @@ export async function GET(request) {
     await supabase.auth.exchangeCodeForSession(code)
   }
 
-  // Use the public URL, not the internal Render URL
+  // If redirect is a full URL (starts with http), use it directly
+  // Otherwise, resolve against our base URL
+  if (redirect.startsWith('http://') || redirect.startsWith('https://')) {
+    return NextResponse.redirect(redirect)
+  }
+
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://auth.getclicked.ai'
   return NextResponse.redirect(new URL(redirect, baseUrl))
 }
