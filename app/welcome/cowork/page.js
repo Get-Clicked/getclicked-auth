@@ -15,11 +15,17 @@ export default function CoworkSetup() {
     },
     {
       num: '3',
-      title: 'Install Get Clicked',
-      desc: 'Click "Customize" in the sidebar, then "Browse plugins." Search for "Get Clicked" and click Install.',
+      title: 'Add the Get Clicked marketplace',
+      desc: 'Click "Customize" in the sidebar, then "Browse plugins," then "Add marketplace." Paste this:',
+      code: 'Get-Clicked/getclicked-growth',
     },
     {
       num: '4',
+      title: 'Install the plugin',
+      desc: 'Find "getclicked-growth" in the plugin list and click Install.',
+    },
+    {
+      num: '5',
       title: 'Start talking',
       desc: 'Open a new conversation and tell it about your business. Something like: "I run a SaaS company that does X, help me figure out my marketing."',
     },
@@ -65,7 +71,7 @@ export default function CoworkSetup() {
             Set up Cowork
           </h1>
           <p style={{ fontSize: 15, color: '#888', lineHeight: 1.6 }}>
-            Four steps. Takes about 2 minutes.
+            Five steps. Takes about 2 minutes.
           </p>
         </div>
 
@@ -108,6 +114,20 @@ export default function CoworkSetup() {
                   <p style={{ fontSize: 14, color: '#888', lineHeight: 1.6 }}>
                     {step.desc}
                   </p>
+                  {step.code && (
+                    <div style={{
+                      background: '#111',
+                      borderRadius: 8,
+                      padding: '10px 14px',
+                      fontFamily: "'JetBrains Mono', monospace",
+                      fontSize: 12,
+                      color: 'rgba(255,255,255,0.8)',
+                      marginTop: 8,
+                      userSelect: 'all',
+                    }}>
+                      {step.code}
+                    </div>
+                  )}
                   {step.link && (
                     <a
                       href={step.link.href}
